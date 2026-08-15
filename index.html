@@ -159,7 +159,17 @@ body{
     flex-shrink: 1;
 }
 
-/* Mobile  */
+
+.ob3lus-three {
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+.ob3lus-three:hover,.highlight-three:active {
+  color: red;
+  cursor: pointer;
+}
+
+/* Mobile Shit */
 .nav .images{
       display: none;
     }
@@ -281,10 +291,9 @@ body{
   <div class="content">
     
     <div class="paper-box">
-      
-      <pre>
-        <h1> &divide; ob3lus &divide;</h1>
-Zhofrph wr wklv ixqqb vlwh,
+  <pre>
+      <h1> &divide; ob<span id="cipher-toggle" class="ob3lus-three">3</span>lus &divide;</h1>
+<span id="poem-body">Zhofrph wr wklv ixqqb vlwh,
 wkhuh duh pdqb wklqjv wr vhh!
 D vdqfwxdub iurp wkh frusrudwh eoljkw, 
 iru zklfk zh krog wkh nhb. 
@@ -292,13 +301,13 @@ iru zklfk zh krog wkh nhb.
 Lpdjhv froohfwhg zlwk wkh pdfklqh, Zdbedfn.
 Rii vlwhv ri dq lqwhuqhw wkdw halvwhg, iduedfn!
 
-Vr hqmrb wkhvh judsklfv, iurp wkh zhe ri bruh. 
+Vr hqmrb wkhvh judsklfv, iurp wkh zhe ri buruh. 
 Froohfwhg zlwk fduh, wloo wkh hbhv zhuh vruh.
 
 [Sdugrq rxu gxvw, iru zh duh vwloo frqvwuxfwlqj.]
-[Hiiruw lv frqvwdqw, zh duh qrw uhoxfwlqj.]
+[Hiiruw lv frqvwdqw, zh duh qrw uhoxfwlqj.]</span>
 </pre>
-    </div>
+</div>
     
     
   </div>
@@ -316,6 +325,26 @@ Froohfwhg zlwk fduh, wloo wkh hbhv zhuh vruh.
 
 </body>
 
+<script>
+const poemBody = document.getElementById('poem-body');
+const encryptedText = poemBody.textContent; // starts encrypted in the HTML
+
+function caesarShift(str, shift) {
+  return str.replace(/[a-zA-Z]/g, function(c) {
+    const base = c <= 'Z' ? 65 : 97;
+    return String.fromCharCode((c.charCodeAt(0) - base + shift + 26) % 26 + base);
+  });
+}
+
+const decryptedText = caesarShift(encryptedText, -3);
+
+let showingEncrypted = true;
+document.getElementById('cipher-toggle').addEventListener('click', function() {
+  showingEncrypted = !showingEncrypted;
+  poemBody.textContent = showingEncrypted ? encryptedText : decryptedText;
+});
+</script>
+
 <!---
 
 All that for nothing, you really are a stubborn aren't you...
@@ -324,4 +353,3 @@ All that for nothing, you really are a stubborn aren't you...
 
 
 </html>
-
